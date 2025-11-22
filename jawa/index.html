@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="jw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jagad Pewayangan Jawi</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts - Inter & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Konfigurasi Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'wayang-gold': '#D4AF37',
+                        'wayang-red': '#8B0000',
+                        'wayang-brown': '#8B4513',
+                        'wayang-dark': '#1a1a1a',
+                        'wayang-cream': '#FFF8DC',
+                        'wayang-maroon': '#800000',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'playfair': ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px rgba(212, 175, 55, 0.5)' },
+                            '100%': { boxShadow: '0 0 30px rgba(212, 175, 55, 0.8)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .heading-font {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Custom scrollbar styling */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #8B4513;
+            border-radius: 4px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #654321;
+        }
+        
+        /* Glassmorphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #D4AF37, #8B4513);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Card hover effects */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Navbar scroll effect */
+        .navbar-scrolled {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Hero pattern overlay */
+        .hero-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 69, 19, 0.1) 0%, transparent 50%);
+        }
+        
+        /* Button animations */
+        .btn-glow:hover {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        /* Image zoom effect */
+        .image-zoom {
+            overflow: hidden;
+        }
+        
+        .image-zoom img {
+            transition: transform 0.5s ease;
+        }
+        
+        .image-zoom:hover img {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-inter">
+    
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 z-50 w-full transition-all duration-300 navbar-scrolled">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo/Brand -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="ganti-bahasa-teks">
+                            <h1 class="bahasa-jawa text-wayang-gold text-xl font-bold heading-font flex items-center">
+                                <i class="fas fa-theater-masks mr-2"></i>
+                                Jagad Wayang
+                            </h1>
+                            <h1 class="aksara-jawa text-wayang-gold text-xl font-bold heading-font" style="display:none;">
+                                <i class="fas fa-theater-masks mr-2"></i>
+                                Lorem ipsum
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <!-- Beranda -->
+                        <div class="ganti-bahasa-teks">
+                            <a href="#beranda" class="bahasa-jawa text-gray-300 hover:text-wayang-gold px-3 py-2 rounded-md text-sm font-medium transition-colors">Beranda</a>
+                            <a href="#beranda" class="aksara-jawa text-gray-300 hover:text-wayang-gold px-3 py-2 rounded-md text-sm font-medium transition-colors" style="display:none;">Lorem ipsum</a>
+                        </div>
+                        
+                        <!-- Dropdown Cerita Wayang -->
+                        <div class="relative group">
+                            <button class="ganti-bahasa-teks text-gray-300 hover:text-wayang-gold px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center">
+                                <span class="bahasa-jawa">Cerita Wayang</span>
+                                <span class="aksara-jawa" style="display:none;">Lorem ipsum</span>
+                                <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            
+                            <!-- Dropdown Content -->
+                            <div class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-wayang-dark ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                                <div class="py-1">
+                                    <div class="ganti-bahasa-teks">
+                                        <a href="#mahabharata" class="bahasa-jawa block px-4 py-2 text-sm text-gray-300 hover:text-wayang-gold hover:bg-wayang-brown">Mahabharata</a>
+                                        <a href="#mahabharata" class="aksara-jawa block px-4 py-2 text-sm text-gray-300 hover:text-wayang-gold hover:bg-wayang-brown" style="display:none;">Lorem ipsum</a>
+                                    </div>
+                                    <div class="ganti-bahasa-teks">
+                                        <a href="#ramayana" class="bahasa-jawa block px-4 py-2 text-sm text-gray-300 hover:text-wayang-gold hover:bg-wayang-brown">Ramayana</a>
+                                        <a href="#ramayana" class="aksara-jawa block px-4 py-2 text-sm text-gray-300 hover:text-wayang-gold hover:bg-wayang-brown" style="display:none;">Lorem ipsum</a>
+                                    </div>
+                                    <div class="ganti-bahasa-teks">
+                                        <a href="#dewa-ruci" class="bahasa-jawa block px-4 py-2 text-sm text-gray-300 hover:text-wayang-gold hover:bg-wayang-brown">Dewa Ruci</a>
+                                        <a href="#dewa-ruci" class="aksara-jawa block px-4 py-2 text-sm text-gray-300 hover:text-wayang-gold hover:bg-wayang-brown" style="display:none;">Lorem ipsum</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Silsilah Tokoh -->
+                        <div class="ganti-bahasa-teks">
+                            <a href="#silsilah" class="bahasa-jawa text-gray-300 hover:text-wayang-gold px-3 py-2 rounded-md text-sm font-medium transition-colors">Silsilah Tokoh</a>
+                            <a href="#silsilah" class="aksara-jawa text-gray-300 hover:text-wayang-gold px-3 py-2 rounded-md text-sm font-medium transition-colors" style="display:none;">Lorem ipsum</a>
+                        </div>
+                        
+                        <!-- Galeri -->
+                        <div class="ganti-bahasa-teks">
+                            <a href="#galeri" class="bahasa-jawa text-gray-300 hover:text-wayang-gold px-3 py-2 rounded-md text-sm font-medium transition-colors">Galeri</a>
+                            <a href="#galeri" class="aksara-jawa text-gray-300 hover:text-wayang-gold px-3 py-2 rounded-md text-sm font-medium transition-colors" style="display:none;">Lorem ipsum</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Language Toggle Button -->
+                <div class="flex items-center">
+                    <button id="languageToggle" class="bg-wayang-gold text-wayang-dark px-4 py-2 rounded-md font-medium hover:bg-yellow-500 transition-colors btn-glow">
+                        Jawa / ꦗꦮ
+                    </button>
+                    
+                    <!-- Mobile menu button -->
+                    <button id="mobileMenuBtn" class="md:hidden ml-2 text-gray-300 hover:text-wayang-gold p-2">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-wayang-dark">
+                <div class="ganti-bahasa-teks">
+                    <a href="#beranda" class="bahasa-jawa text-gray-300 hover:text-wayang-gold block px-3 py-2 rounded-md text-base font-medium">Beranda</a>
+                    <a href="#beranda" class="aksara-jawa text-gray-300 hover:text-wayang-gold block px-3 py-2 rounded-md text-base font-medium" style="display:none;">Lorem ipsum</a>
+                </div>
+                
+                <div class="ganti-bahasa-teks">
+                    <div class="bahasa-jawa text-gray-300 hover:text-wayang-gold block px-3 py-2 rounded-md text-base font-medium">Cerita Wayang</div>
+                    <div class="aksara-jawa text-gray-300 hover:text-wayang-gold block px-3 py-2 rounded-md text-base font-medium" style="display:none;">Lorem ipsum</div>
+                </div>
+                
+                <div class="ganti-bahasa-teks">
+                    <a href="#silsilah" class="bahasa-jawa text-gray-300 hover:text-wayang-gold block px-3 py-2 rounded-md text-base font-medium">Silsilah Tokoh</a>
+                    <a href="#silsilah" class="aksara-jawa text-gray-300 hover:text-wayang-gold block px-3 py-2 rounded-md text-base font-medium" style="display:none;">Lorem ipsum</a>
+                </div>
+                
+                <div class="ganti-bahasa-teks">
+                    <a href="#galeri" class="bahasa-jawa text-gray-300 hover:text-wayang-gold block px-3 py-2 rounded-md text-base font-medium">Galeri</a>
+                    <a href="#galeri" class="aksara-jawa text-gray-300 hover:text-wayang-gold block px-3 py-2 rounded-md text-base font-medium" style="display:none;">Lorem ipsum</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="beranda" class="relative min-h-screen flex items-center justify-center overflow-hidden hero-pattern">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src ="gambar/wayang.jpg" alt="Wayang Background" class="w-full h-full object-cover brightness-75">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70"></div>
+        </div>
+        
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+            <div class="ganti-bahasa-teks" data-aos="fade-up" data-aos-duration="1000">
+                <h1 class="bahasa-jawa text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 heading-font">
+                    <span class="gradient-text">Jagad Pewayangan Jawi</span>
+                </h1>
+                <h1 class="aksara-jawa text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 heading-font" style="display:none;">
+                    <span class="gradient-text">Lorem ipsum dolor sit amet</span>
+                </h1>
+            </div>
+            
+            <div class="ganti-bahasa-teks" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                <p class="bahasa-jawa text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed">
+                    Nguri-uri Kabudayan Luhur Nusantara
+                </p>
+                <p class="aksara-jawa text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed" style="display:none;">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                </p>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                <button class="bg-wayang-gold text-wayang-dark px-8 py-4 rounded-lg font-semibold hover:bg-yellow-500 transition-all duration-300 transform hover:scale-105 btn-glow">
+                    <div class="ganti-bahasa-teks">
+                        <span class="bahasa-jawa flex items-center">
+                            <i class="fas fa-play mr-2"></i>
+                            Mlebet wonten ing Jagad
+                        </span>
+                        <span class="aksara-jawa flex items-center" style="display:none;">
+                            <i class="fas fa-play mr-2"></i>
+                            Lorem ipsum
+                        </span>
+                    </div>
+                </button>
+                
+                <button class="border-2 border-wayang-gold text-wayang-gold px-8 py-4 rounded-lg font-semibold hover:bg-wayang-gold hover:text-wayang-dark transition-all duration-300 transform hover:scale-105">
+                    <div class="ganti-bahasa-teks">
+                        <span class="bahasa-jawa flex items-center">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            Kathah Informasi
+                        </span>
+                        <span class="aksara-jawa flex items-center" style="display:none;">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            Lorem ipsum
+                        </span>
+                    </div>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
+    </section>
+    
+    <!-- Sejarah Ringkes Wayang -->
+    <section class="py-20 bg-gradient-to-br from-wayang-cream to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div class="ganti-bahasa-teks">
+                    <h2 class="bahasa-jawa text-4xl md:text-5xl font-bold text-wayang-dark mb-6 heading-font">
+                        Sejarah Ringkes Wayang
+                    </h2>
+                    <h2 class="aksara-jawa text-4xl md:text-5xl font-bold text-wayang-dark mb-6 heading-font" style="display:none;">
+                        Lorem ipsum dolor sit
+                    </h2>
+                </div>
+                <div class="w-24 h-1 bg-wayang-gold mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8" data-aos="fade-right">
+                    <div class="ganti-bahasa-teks">
+                        <div class="bg-white p-8 rounded-2xl shadow-xl card-hover">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-wayang-gold p-3 rounded-full mr-4">
+                                    <i class="fas fa-history text-wayang-dark text-xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-wayang-dark heading-font">Asal Usul</h3>
+                            </div>
+                            <p class="bahasa-jawa text-gray-700 leading-relaxed text-lg">
+                                Wayang kulit minangka salah satunggaling seni pertunjukan tradhisional ingkang paling sepuh saking Jawa. 
+                                Seni punika sampun lumayan langkung saking ewon taun, nggabungaken seni sastra, seni rupa, saha seni musik 
+                                ing satunggaling pertunjukan ingkang nyenengaken.
+                            </p>
+                            <p class="aksara-jawa text-gray-700 leading-relaxed text-lg" style="display:none;">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="ganti-bahasa-teks">
+                        <div class="bg-white p-8 rounded-2xl shadow-xl card-hover">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-wayang-red p-3 rounded-full mr-4">
+                                    <i class="fas fa-theater-masks text-white text-xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-wayang-dark heading-font">Unsur Pertunjukan</h3>
+                            </div>
+                            <p class="bahasa-jawa text-gray-700 leading-relaxed text-lg">
+                                Unsur-unsur utami ing pertunjukan wayang kulit kalebu dalang minangka sutradara sekaligus pencerita, 
+                                nayaga (penyaji musik) ingkang mainaken gamelan, saha waranggana (penyayi).
+                            </p>
+                            <p class="aksara-jawa text-gray-700 leading-relaxed text-lg" style="display:none;">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative" data-aos="fade-left">
+                    <div class="relative z-10">
+                        <img src="gambar/dalang2.jpeg" alt="Dalang Wayang" class="rounded-2xl shadow-2xl">
+                    </div>
+                    <!-- Decorative elements -->
+                    <div class="absolute -top-4 -right-4 w-32 h-32 bg-wayang-gold rounded-full opacity-20 blur-xl"></div>
+                    <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-wayang-red rounded-full opacity-20 blur-xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Cerita Wayang Terkenal -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div class="ganti-bahasa-teks">
+                    <h2 class="bahasa-jawa text-4xl md:text-5xl font-bold text-wayang-dark mb-6 heading-font">
+                        Cerita Wayang Terkenal
+                    </h2>
+                    <h2 class="aksara-jawa text-4xl md:text-5xl font-bold text-wayang-dark mb-6 heading-font" style="display:none;">
+                        Lorem ipsum dolor sit
+                    </h2>
+                </div>
+                <div class="w-24 h-1 bg-wayang-gold mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Mahabharata -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="100">
+                    <div class="image-zoom h-48">
+                        <img src="gambar/mahabarata.jpeg" alt="Mahabharata" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-wayang-gold p-2 rounded-full mr-3">
+                                <i class="fas fa-book text-wayang-dark"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-wayang-dark heading-font">Mahabharata</h3>
+                        </div>
+                        <div class="ganti-bahasa-teks">
+                            <p class="bahasa-jawa text-gray-600 mb-4">
+                                Epos ageng saking India ingkang nyeritaken perang antawisipun Pandawa lan Kurawa.
+                            </p>
+                            <p class="aksara-jawa text-gray-600 mb-4" style="display:none;">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </p>
+                        </div>
+                        <button class="text-wayang-gold font-semibold hover:text-wayang-brown transition-colors">
+                            <div class="ganti-bahasa-teks flex items-center">
+                                <span class="bahasa-jawa">Kathah Liyané</span>
+                                <span class="aksara-jawa" style="display:none;">Lorem ipsum</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Ramayana -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="200">
+                    <div class="image-zoom h-48">
+                        <img src="gambar/ramayana.jpg" alt="Ramayana" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-wayang-red p-2 rounded-full mr-3">
+                                <i class="fas fa-crown text-white"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-wayang-dark heading-font">Ramayana</h3>
+                        </div>
+                        <div class="ganti-bahasa-teks">
+                            <p class="bahasa-jawa text-gray-600 mb-4">
+                                Cariyos Rama ingkang nyeritaken perjuangan kanggo nylametaken Dewi Sita saking Rahwana.
+                            </p>
+                            <p class="aksara-jawa text-gray-600 mb-4" style="display:none;">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </p>
+                        </div>
+                        <button class="text-wayang-gold font-semibold hover:text-wayang-brown transition-colors">
+                            <div class="ganti-bahasa-teks flex items-center">
+                                <span class="bahasa-jawa">Kathah Liyané</span>
+                                <span class="aksara-jawa" style="display:none;">Lorem ipsum</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Dewa Ruci -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover" data-aos="fade-up" data-aos-delay="300">
+                    <div class="image-zoom h-48">
+                        <img src="gambar/dewa.webp" alt="Dewa Ruci" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-wayang-brown p-2 rounded-full mr-3">
+                                <i class="fas fa-water text-white"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-wayang-dark heading-font">Dewa Ruci</h3>
+                        </div>
+                        <div class="ganti-bahasa-teks">
+                            <p class="bahasa-jawa text-gray-600 mb-4">
+                                Cariyos Bima ingkang nggayuh kesempurnaan kanthi tembagan marang Dewa Ruci.
+                            </p>
+                            <p class="aksara-jawa text-gray-600 mb-4" style="display:none;">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </p>
+                        </div>
+                        <button class="text-wayang-gold font-semibold hover:text-wayang-brown transition-colors">
+                            <div class="ganti-bahasa-teks flex items-center">
+                                <span class="bahasa-jawa">Kathah Liyané</span>
+                                <span class="aksara-jawa" style="display:none;">Lorem ipsum</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Silsilah Tokoh -->
+    <section id="silsilah" class="py-20 bg-gradient-to-br from-wayang-dark to-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div class="ganti-bahasa-teks">
+                    <h2 class="bahasa-jawa text-4xl md:text-5xl font-bold text-white mb-6 heading-font">
+                        Silsilah Tokoh Pewayangan
+                    </h2>
+                    <h2 class="aksara-jawa text-4xl md:text-5xl font-bold text-white mb-6 heading-font" style="display:none;">
+                        Lorem ipsum dolor sit
+                    </h2>
+                </div>
+                <div class="w-24 h-1 bg-wayang-gold mx-auto rounded-full"></div>
+            </div>
+            
+            <!-- Interactive Character Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6" data-aos="fade-up">
+                <div class="text-center group cursor-pointer">
+                    <div class="bg-wayang-gold rounded-2xl p-6 mb-3 transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl">
+                        <i class="fas fa-user text-4xl text-wayang-dark"></i>
+                    </div>
+                    <div class="ganti-bahasa-teks">
+                        <span class="bahasa-jawa font-semibold text-white">Pandawa</span>
+                        <span class="aksara-jawa font-semibold text-white" style="display:none;">Lorem</span>
+                    </div>
+                </div>
+                
+                <div class="text-center group cursor-pointer">
+                    <div class="bg-wayang-red rounded-2xl p-6 mb-3 transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl">
+                        <i class="fas fa-user-ninja text-4xl text-white"></i>
+                    </div>
+                    <div class="ganti-bahasa-teks">
+                        <span class="bahasa-jawa font-semibold text-white">Kurawa</span>
+                        <span class="aksara-jawa font-semibold text-white" style="display:none;">Ipsum</span>
+                    </div>
+                </div>
+                
+                <div class="text-center group cursor-pointer">
+                    <div class="bg-wayang-brown rounded-2xl p-6 mb-3 transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl">
+                        <i class="fas fa-crown text-4xl text-white"></i>
+                    </div>
+                    <div class="ganti-bahasa-teks">
+                        <span class="bahasa-jawa font-semibold text-white">Dewa</span>
+                        <span class="aksara-jawa font-semibold text-white" style="display:none;">Dolor</span>
+                    </div>
+                </div>
+                
+                <div class="text-center group cursor-pointer">
+                    <div class="bg-gray-600 rounded-2xl p-6 mb-3 transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl">
+                        <i class="fas fa-dragon text-4xl text-white"></i>
+                    </div>
+                    <div class="ganti-bahasa-teks">
+                        <span class="bahasa-jawa font-semibold text-white">Raksasa</span>
+                        <span class="aksara-jawa font-semibold text-white" style="display:none;">Sit</span>
+                    </div>
+                </div>
+                
+                <div class="text-center group cursor-pointer">
+                    <div class="bg-wayang-gold rounded-2xl p-6 mb-3 transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl">
+                        <i class="fas fa-user text-4xl text-wayang-dark"></i>
+                    </div>
+                    <div class="ganti-bahasa-teks">
+                        <span class="bahasa-jawa font-semibold text-white">Manungsa</span>
+                        <span class="aksara-jawa font-semibold text-white" style="display:none;">Amet</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="200">
+                <div class="ganti-bahasa-teks">
+                    <p class="bahasa-jawa text-gray-300 text-lg mb-6">
+                        Klik karakter ing nginggih kanggo mangertosi lelampahan lan silsilahipun
+                    </p>
+                    <p class="aksara-jawa text-gray-300 text-lg mb-6" style="display:none;">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    </p>
+                </div>
+                <button class="bg-wayang-gold text-wayang-dark px-8 py-3 rounded-lg font-semibold hover:bg-yellow-500 transition-all duration-300 transform hover:scale-105">
+                    <div class="ganti-bahasa-teks">
+                        <span class="bahasa-jawa flex items-center">
+                            <i class="fas fa-sitemap mr-2"></i>
+                            Pirsani Silsilah Lengkap
+                        </span>
+                        <span class="aksara-jawa flex items-center" style="display:none;">
+                            <i class="fas fa-sitemap mr-2"></i>
+                            Lorem ipsum
+                        </span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Galeri Wayang -->
+    <section id="galeri" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div class="ganti-bahasa-teks">
+                    <h2 class="bahasa-jawa text-4xl md:text-5xl font-bold text-wayang-dark mb-6 heading-font">
+                        Galeri Wayang
+                    </h2>
+                    <h2 class="aksara-jawa text-4xl md:text-5xl font-bold text-wayang-dark mb-6 heading-font" style="display:none;">
+                        Lorem ipsum dolor sit
+                    </h2>
+                </div>
+                <div class="w-24 h-1 bg-wayang-gold mx-auto rounded-full"></div>
+            </div>
+            
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Wayang 1 -->
+                <div class="relative group overflow-hidden rounded-2xl shadow-lg card-hover" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="image-zoom h-64">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Wayang Arjuna" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end">
+                        <div class="p-4 text-white w-full">
+                            <div class="ganti-bahasa-teks">
+                                <h3 class="bahasa-jawa font-bold text-lg mb-1">Wayang Arjuna</h3>
+                                <h3 class="aksara-jawa font-bold text-lg mb-1" style="display:none;">Lorem ipsum</h3>
+                            </div>
+                            <p class="text-sm text-gray-300">Pandawa ketiga</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Wayang 2 -->
+                <div class="relative group overflow-hidden rounded-2xl shadow-lg card-hover" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="image-zoom h-64">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Wayang Bima" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end">
+                        <div class="p-4 text-white w-full">
+                            <div class="ganti-bahasa-teks">
+                                <h3 class="bahasa-jawa font-bold text-lg mb-1">Wayang Bima</h3>
+                                <h3 class="aksara-jawa font-bold text-lg mb-1" style="display:none;">Lorem ipsum</h3>
+                            </div>
+                            <p class="text-sm text-gray-300">Pandawa kedua</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Wayang 3 -->
+                <div class="relative group overflow-hidden rounded-2xl shadow-lg card-hover" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="image-zoom h-64">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Wayang Yudhistira" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end">
+                        <div class="p-4 text-white w-full">
+                            <div class="ganti-bahasa-teks">
+                                <h3 class="bahasa-jawa font-bold text-lg mb-1">Wayang Yudhistira</h3>
+                                <h3 class="aksara-jawa font-bold text-lg mb-1" style="display:none;">Lorem ipsum</h3>
+                            </div>
+                            <p class="text-sm text-gray-300">Pandawa pertama</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Wayang 4 -->
+                <div class="relative group overflow-hidden rounded-2xl shadow-lg card-hover" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="image-zoom h-64">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Wayang Nakula" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end">
+                        <div class="p-4 text-white w-full">
+                            <div class="ganti-bahasa-teks">
+                                <h3 class="bahasa-jawa font-bold text-lg mb-1">Wayang Nakula</h3>
+                                <h3 class="aksara-jawa font-bold text-lg mb-1" style="display:none;">Lorem ipsum</h3>
+                            </div>
+                            <p class="text-sm text-gray-300">Pandawa keempat</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Wayang 5 -->
+                <div class="relative group overflow-hidden rounded-2xl shadow-lg card-hover" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="image-zoom h-64">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Wayang Sadewa" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end">
+                        <div class="p-4 text-white w-full">
+                            <div class="ganti-bahasa-teks">
+                                <h3 class="bahasa-jawa font-bold text-lg mb-1">Wayang Sadewa</h3>
+                                <h3 class="aksara-jawa font-bold text-lg mb-1" style="display:none;">Lorem ipsum</h3>
+                            </div>
+                            <p class="text-sm text-gray-300">Pandawa kelima</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Wayang 6 -->
+                <div class="relative group overflow-hidden rounded-2xl shadow-lg card-hover" data-aos="zoom-in" data-aos-delay="600">
+                    <div class="image-zoom h-64">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Wayang Kresna" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end">
+                        <div class="p-4 text-white w-full">
+                            <div class="ganti-bahasa-teks">
+                                <h3 class="bahasa-jawa font-bold text-lg mb-1">Wayang Kresna</h3>
+                                <h3 class="aksara-jawa font-bold text-lg mb-1" style="display:none;">Lorem ipsum</h3>
+                            </div>
+                            <p class="text-sm text-gray-300">Avatar Dewa Wisnu</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Wayang 7 -->
+                <div class="relative group overflow-hidden rounded-2xl shadow-lg card-hover" data-aos="zoom-in" data-aos-delay="700">
+                    <div class="image-zoom h-64">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Wayang Srikandi" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end">
+                        <div class="p-4 text-white w-full">
+                            <div class="ganti-bahasa-teks">
+                                <h3 class="bahasa-jawa font-bold text-lg mb-1">Wayang Srikandi</h3>
+                                <h3 class="aksara-jawa font-bold text-lg mb-1" style="display:none;">Lorem ipsum</h3>
+                            </div>
+                            <p class="text-sm text-gray-300">Permaisuri Arjuna</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Wayang 8 -->
+                <div class="relative group overflow-hidden rounded-2xl shadow-lg card-hover" data-aos="zoom-in" data-aos-delay="800">
+                    <div class="image-zoom h-64">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Wayang Hanoman" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end">
+                        <div class="p-4 text-white w-full">
+                            <div class="ganti-bahasa-teks">
+                                <h3 class="bahasa-jawa font-bold text-lg mb-1">Wayang Hanoman</h3>
+                                <h3 class="aksara-jawa font-bold text-lg mb-1" style="display:none;">Lorem ipsum</h3>
+                            </div>
+                            <p class="text-sm text-gray-300">Putera Bathara Guru</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-wayang-dark text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <!-- About Section -->
+                <div>
+                    <h3 class="text-2xl font-bold text-wayang-gold mb-4 heading-font">Jagad Wayang</h3>
+                    <div class="ganti-bahasa-teks">
+                        <p class="bahasa-jawa text-gray-300 mb-4">
+                            Platform digital kanggo nguri-uri lan ngembangaken kabudayan pewayangan Jawa.
+                        </p>
+                        <p class="aksara-jawa text-gray-300 mb-4" style="display:none;">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold text-wayang-gold mb-4">Menu Cepat</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#beranda" class="text-gray-300 hover:text-wayang-gold transition-colors">Beranda</a></li>
+                        <li><a href="#sejarah" class="text-gray-300 hover:text-wayang-gold transition-colors">Sejarah</a></li>
+                        <li><a href="#silsilah" class="text-gray-300 hover:text-wayang-gold transition-colors">Silsilah</a></li>
+                        <li><a href="#galeri" class="text-gray-300 hover:text-wayang-gold transition-colors">Galeri</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-lg font-semibold text-wayang-gold mb-4">Hubungi Kami</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-wayang-gold transition-colors">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-wayang-gold transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-wayang-gold transition-colors">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-wayang-gold transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 text-center">
+                <div class="ganti-bahasa-teks">
+                    <p class="bahasa-jawa text-gray-300 mb-2">
+                        © 2024 Jagad Pewayangan Jawi - Nguri-uri Kabudayan Nusantara
+                    </p>
+                    <p class="aksara-jawa text-gray-300 mb-2" style="display:none;">
+                        © 2024 Lorem ipsum dolor sit amet - Lorem ipsum dolor sit
+                    </p>
+                </div>
+                
+                <div class="ganti-bahasa-teks">
+                    <p class="bahasa-jawa text-gray-400 text-sm">
+                        Semua konten dilindungi oleh hak cipta
+                    </p>
+                    <p class="aksara-jawa text-gray-400 text-sm" style="display:none;">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- JavaScript untuk Toggle Bahasa & Interactions -->
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+        
+        // Variabel global untuk melacak status bahasa
+        let isAksaraJawa = false;
+        
+        // Fungsi untuk toggle bahasa
+        function toggleBahasa() {
+            // Dapatkan semua elemen yang memiliki class 'ganti-bahasa-teks'
+            const kontainerBahasa = document.querySelectorAll('.ganti-bahasa-teks');
+            
+            // Toggle status
+            isAksaraJawa = !isAksaraJawa;
+            
+            // Loop melalui setiap kontainer
+            kontainerBahasa.forEach(function(kontainer) {
+                // Dapatkan elemen bahasa Jawa dan Aksara Jawa dalam kontainer ini
+                const elemenJawa = kontainer.querySelector('.bahasa-jawa');
+                const elemenAksara = kontainer.querySelector('.aksara-jawa');
+                
+                if (elemenJawa && elemenAksara) {
+                    if (isAksaraJawa) {
+                        // Tampilkan Aksara Jawa, sembunyikan Bahasa Jawa
+                        elemenJawa.style.display = 'none';
+                        elemenAksara.style.display = 'block';
+                    } else {
+                        // Tampilkan Bahasa Jawa, sembunyikan Aksara Jawa
+                        elemenJawa.style.display = 'block';
+                        elemenAksara.style.display = 'none';
+                    }
+                }
+            });
+            
+            // Update button text untuk memberi feedback visual
+            const toggleBtn = document.getElementById('languageToggle');
+            if (isAksaraJawa) {
+                toggleBtn.textContent = 'ꦗꦮ / Jawa';
+                toggleBtn.classList.add('bg-yellow-600');
+            } else {
+                toggleBtn.textContent = 'Jawa / ꦗꦮ';
+                toggleBtn.classList.remove('bg-yellow-600');
+            }
+        }
+        
+        // Fungsi untuk toggle mobile menu
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+        
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tambahkan event listener ke tombol toggle bahasa
+            const languageToggle = document.getElementById('languageToggle');
+            if (languageToggle) {
+                languageToggle.addEventListener('click', toggleBahasa);
+            }
+            
+            // Tambahkan event listener ke tombol mobile menu
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            }
+            
+            // Smooth scroll untuk link navigasi
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Tutup mobile menu jika terbuka
+                        const mobileMenu = document.getElementById('mobileMenu');
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        });
+        
+        // Parallax effect for hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroImage = document.querySelector('#beranda img');
+            if (heroImage) {
+                heroImage.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+    
+</body>
+</html>

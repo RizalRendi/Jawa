@@ -1,0 +1,383 @@
+/* Custom Styles for Jagad Pewayangan Jawi */
+
+body {
+    font-family: 'Inter', sans-serif;
+    height: 100%;
+    margin: 0;
+    background: #1a1a1a;
+    scroll-behavior: smooth;
+}
+
+.heading-font {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Custom scrollbar styling */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #8B4513;
+    border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #654321;
+}
+
+/* Glassmorphism effect */
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Gradient text */
+.gradient-text {
+    background: linear-gradient(135deg, #D4AF37, #8B4513);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Card hover effects */
+.card-hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    will-change: transform, box-shadow;
+}
+
+.card-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(139, 69, 19, 0.1));
+}
+
+/* Navbar scroll effect */
+.navbar-scrolled {
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Hero pattern overlay */
+.hero-pattern {
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(139, 69, 19, 0.1) 0%, transparent 50%);
+}
+
+/* Button animations */
+.btn-glow {
+    transition: all 0.35s ease-in-out;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+.btn-glow:hover {
+    animation: glow 2s ease-in-out infinite alternate;
+    transform: scale(1.07);
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.9);
+}
+
+/* Image zoom effect */
+.image-zoom {
+    overflow: hidden;
+}
+
+.image-zoom img {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-zoom:hover img {
+    transform: scale(1.1);
+}
+
+/* Page transitions */
+.page-section {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    min-height: 100vh;
+}
+
+.page-section.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    animation: fadeIn 0.35s ease-out;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 1rem;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideIn 0.35s ease-out;
+    scrollbar-width: thin;
+    scrollbar-color: #8B4513 #f1f1f1;
+}
+
+/* Scrollbar for modal content */
+.modal-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background-color: #8B4513;
+    border-radius: 8px;
+    border: 2px solid #f1f1f1;
+}
+
+/* Active nav item */
+.nav-active {
+    background: rgba(212, 175, 55, 0.25);
+    border-left: 3px solid #D4AF37;
+}
+
+/* Landing page specific */
+.landing-content {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-content {
+    display: none;
+}
+
+.main-content.show {
+    display: block;
+}
+
+/* Responsive Typography Improvements */
+@media (max-width: 768px) {
+    .card-hover:hover {
+        transform: translateY(-5px) scale(1.01);
+    }
+    
+    .character-card p {
+        font-size: 0.875rem;
+    }
+    
+    .character-card h3 {
+        font-size: 1.25rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+    }
+}
+
+/* Accessibility :focus styles */
+button:focus,
+a:focus {
+    outline: 3px solid #D4AF37;
+    outline-offset: 2px;
+    box-shadow: 0 0 8px #D4AF37;
+}
+
+/* Mobile menu improvements */
+@media (max-width: 768px) {
+    .nav-link {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .mobile-menu {
+        padding: 1rem;
+    }
+}
+
+/* Character card improvements */
+.character-card {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: white;
+}
+
+.character-card:hover {
+    border-color: rgba(212, 175, 55, 0.2);
+}
+
+/* Animation improvements */
+@keyframes glow {
+    0% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.4); }
+    100% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.9); }
+}
+
+@keyframes slideIn {
+    0% { transform: translateX(100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Language switching improvements */
+.ganti-bahasa-teks {
+    transition: all 0.3s ease;
+}
+
+.ganti-bahasa-teks .bahasa-jawa,
+.ganti-bahasa-teks .aksara-jawa {
+    transition: all 0.3s ease;
+}
+
+/* Debug styles */
+.debug-border {
+    border: 2px solid red !important;
+}
+
+.debug-bg {
+    background: yellow !important;
+}
+
+.debug-text {
+    color: red !important;
+}
+
+/* Modal content improvements */
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    padding: 1.5rem;
+}
+
+.modal-content h2 {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.modal-content .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.modal-content .space-y-2 p {
+    margin-bottom: 0.5rem;
+}
+
+.modal-content p {
+    line-height: 1.6;
+}
+
+.modal-content strong {
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+/* Button improvements */
+.btn-glow {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Character card improvements */
+.character-card {
+    padding: 1.5rem;
+}
+
+.character-card h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+}
+
+.character-card p {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.character-card button {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Navigation improvements */
+.nav-link {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.nav-active {
+    background: rgba(212, 175, 55, 0.25);
+    border-left: 3px solid #D4AF37;
+}
+
+/* Mobile menu improvements */
+.mobile-menu {
+    padding: 1rem;
+}
+
+.mobile-menu a {
+    padding: 0.75rem 0.5rem;
+    font-size: 1rem;
+}
+
+/* Footer improvements */
+footer {
+    padding: 2rem 0;
+}
+
+/* Content sections */
+.page-section {
+    padding: 3rem 0;
+}
+
+.page-section h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.page-section p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.page-section ul {
+    margin-bottom: 1.5rem;
+}
+
+.page-section li {
+    margin-bottom: 0.5rem;
+}
